@@ -37,7 +37,7 @@
         z-index: 4;
         & .light {
             width: 19%;
-            filter: drop-shadow(2px 2px 1px var(--primary));
+            filter: drop-shadow(2px 2px var(--primary));
             aspect-ratio: 1/1;
             position: absolute;
             translate: 150% 300%;

@@ -75,11 +75,9 @@ html {
         font-weight: normal;
         font-size: 4rem;
         letter-spacing: 5px;
-        -webkit-text-stroke: 3px var(--primary);
-        fill: transparent;
-        paint-order: stroke;
         position: absolute;
         margin-top: 10vh;
+        filter: drop-shadow(1px 1px black);
     }
 }
 

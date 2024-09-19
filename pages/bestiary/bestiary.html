@@ -59,7 +59,7 @@
                         <ul v-else-if="creatures.length > 0">
                             <li v-for="creature in creatures" :key="creature.id">
                                 <a href="#" @click.prevent="selectCreature(creature.id)">
-                                    <img src="#" :src="creature.Card"/>
+                                    <img :src="creature.Card"/>
                                     <span>
                                         {{ creature.Name }}
                                     </span>
