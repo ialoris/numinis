@@ -74,10 +74,12 @@ html {
         font-family: var(--title-font);
         font-weight: normal;
         font-size: 4rem;
+        -webkit-text-fill-color: var(--third); /* Will override color (regardless of order) */
+        -webkit-text-stroke: 5px var(--primary);
+        paint-order: stroke fill;
         letter-spacing: 5px;
         position: absolute;
         margin-top: 10vh;
-        filter: drop-shadow(1px 1px black);
     }
 }
 
@@ -172,7 +174,11 @@ html {
         width: 100%;
         height: 100%;
         position: absolute;
-        object-fit: fill; 
+        & #frameimg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
     }
 }
 

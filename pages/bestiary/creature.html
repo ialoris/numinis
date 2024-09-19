@@ -59,7 +59,9 @@
                                     <span id="btnspan" :class="buttonIconClass"></span>
                                 </button>
                                     <div class="frame">
-                                        <img v-if="isExpanded" class="frameback" :src="selectedCreature.Ref" />
+                                        <div class="frameback">
+                                            <img id="frameimg" :src="selectedCreature.Ref" v-if="isExpanded"/>
+                                        </div>
                                         <div v-for="n in 8" :key="n"></div>
                                     </div>
                             </div>
@@ -140,7 +142,7 @@
                 },
                 computed: {
                     buttonIconClass() {
-                        return this.isExpanded ? "ph-minus-square" : "ph-plus-square";
+                        return this.isExpanded ? "icon-minus" : "icon-plus";
                     }
                 },
                 methods: {
@@ -176,7 +178,7 @@
                         this.isExpanded = !this.isExpanded;
                     },
                     setFrameBackground() {
-                        const frameBack = document.querySelector(".frameback");
+                        var frameBack = document.querySelector("#frameimg");
                         if (frameBack && this.selectedCreature && this.selectedCreature.Ref) {
                             frameBack.src = this.selectedCreature.Ref;
                         }
