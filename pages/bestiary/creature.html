@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- CSS -->
+        <link href="/css/framework.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/css/pages/creature.css" rel="stylesheet" type="text/css" media="all" />
+
+        <title>NUMINIS ✦ BESTIARY ✦</title>
+        <link rel="icon" type="image/x-icon" href="/resources/images/graphics/svg/logo.ico" />
+    </head>
+
+    <body>
+        <div class="sticky">
+            <header id="header">
+                <div class="top-head">
+                    <div class="headerlogo">
+                        <div class="logo">
+                            <div class="logosvg"></div>
+                            <h1>Numinis</h1>
+                        </div>
+                    </div>
+                </div>
+                <nav id="nav">
+                    <div class="navlinks">
+                        <a href="/pages/home.html">Home</a>
+                        <a href="/pages/map.html">Map</a>
+                        <div class="dropdown">
+                            <a href="javascript:void(0)">Lore</a>
+                            <div class="dropdown-wrapper">
+                                <div class="dropdown-content">
+                                    <a href="/pages/history.html">History</a>
+                                    <a href="/pages/gods.html">Deities</a>
+                                    <a href="/pages/numinis.html">Numinis</a>
+                                    <a href="/pages/races.html">Races</a>
+                                    <a href="/pages/groups.html">Factions</a>
+                                    <a href="/pages/registry.html">Registry</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/pages/bestiary/bestiary.html">Bestiary</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+
+        <div class="main">
+            <main id="swup" class="transition-fade">
+                <div id="creature-content" v-cloak>
+                    <div v-if="loading">Loading creature data...</div>
+                    <div v-else-if="error">{{ error }}</div>
+                    <div v-else-if="selectedCreature">
+                        <section class="top-content">
+                            <div class="framebox" :class="{ expand: isExpanded }">
+                                <button id="framebtn" @click="buttonClick">
+                                    <span id="btnspan" :class="buttonIconClass"></span>
+                                </button>
+                                    <div class="frame">
+                                        <img v-if="isExpanded" class="frameback" :src="selectedCreature.Ref" />
+                                        <div v-for="n in 8" :key="n"></div>
+                                    </div>
+                            </div>
+                            <div class="infobox" :class="{ expand: isExpanded }">
+                                <ul>
+                                    <li>
+                                        <span class="icon-feather" alt="Name"></span><span></span
+                                        ><span>{{ selectedCreature.Name }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-dna" alt="Type"></span><span></span
+                                        ><span>{{ selectedCreature.Type }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-diamonds-four" alt="Element"></span><span></span
+                                        ><span>{{ selectedCreature.Element }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-scales" alt="Size"></span><span></span
+                                        ><span>{{ selectedCreature.Size }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-compass-rose" alt="Origins"></span><span></span
+                                        ><span>{{ selectedCreature.Origins }}</span>
+                                    </li>
+                                    <li>
+                                        <span class="icon-pulse" alt="Lifespan"></span><span></span
+                                        ><span>{{ selectedCreature.Lifespan }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="lower-content">
+                            <!--- Summary -->
+                            <h2><span class="icon-book"></span><span></span>Summary</h2>
+                            <div v-html="selectedCreature.Summary">{{ selectedCreature.Summary }}</div>
+                            <!--- Nature -->
+                            <h2><span class="icon-behavior"></span><span></span>Nature</h2>
+                            <div v-html="selectedCreature.Nature">{{ selectedCreature.Nature }}</div>
+                            <!--- Habitat -->
+                            <h2><span class="icon-forest"></span><span></span>Habitat</h2>
+                            <div v-html="selectedCreature.Habitat">{{ selectedCreature.Habitat }}</div>
+                            <!--- Ability -->
+                            <h2><span class="icon-fire2"></span><span></span> Ability</h2>
+                            <div v-html="selectedCreature.Ability">{{ selectedCreature.Ability }}</div>
+                            <!--- Diet -->
+                            <h2><span class="icon-diet"></span><span></span> Diet</h2>
+                            <div v-html="selectedCreature.Diet">{{ selectedCreature.Diet }}</div>
+                        </section>
+                    </div>
+                </div>
+                <section>
+                    <div class="bottomdivider"></div>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <div id="footerother">Numinis <span class="icon-copyright"></span> Ialoris / Damion Nelson</div>
+            <div id="footerlinks">
+                <a href="https://discord.gg/2tEXXpyuTH"><span class="icon-discord"></span></a>
+            </div>
+        </footer>
+
+        <!--Javascript-->
+        <script src="/scripts/vue.global.min.js"></script>
+        <script src="https://unpkg.com/swup@4"></script>
+        <script src="/scripts/func.js"></script>
+        <script>
+            Vue.createApp({
+                data() {
+                    return {
+                        selectedCreature: null,
+                        isExpanded: false,
+                        loading: true,
+                        error: null
+                    };
+                },
+                computed: {
+                    buttonIconClass() {
+                        return this.isExpanded ? "ph-minus-square" : "ph-plus-square";
+                    }
+                },
+                methods: {
+                    fetchCreatureDetails() {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const id = parseInt(urlParams.get("id"), 10);
+                        console.log("Fetching creature with ID:", id);
+                        if (!isNaN(id)) {
+                            fetch("/resources/data/creature.json")
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    console.log("Fetched data:", data);
+                                    console.log("Looking for creature with ID:", id);
+                                    this.selectedCreature = data.find((creature) => creature.ID === id) || null;
+                                    console.log("Selected creature:", this.selectedCreature);
+                                    if (!this.selectedCreature) {
+                                        console.log("No creature found with ID:", id);
+                                        this.error = "Creature not found";
+                                    }
+                                    this.loading = false;
+                                })
+                                .catch((error) => {
+                                    console.error("Error fetching JSON:", error);
+                                    this.error = "Failed to load creature data";
+                                    this.loading = false;
+                                });
+                        } else {
+                            this.error = "Invalid creature ID";
+                            this.loading = false;
+                        }
+                    },
+                    buttonClick() {
+                        this.isExpanded = !this.isExpanded;
+                    },
+                    setFrameBackground() {
+                        const frameBack = document.querySelector(".frameback");
+                        if (frameBack && this.selectedCreature && this.selectedCreature.Ref) {
+                            frameBack.src = this.selectedCreature.Ref;
+                        }
+                    }
+                },
+                watch: {
+                    selectedCreature: {
+                        handler() {
+                            this.$nextTick(() => {
+                                this.setFrameBackground();
+                            });
+                        },
+                        deep: true
+                    }
+                },
+                mounted() {
+                    this.fetchCreatureDetails();
+                }
+            }).mount("#creature-content");
+        </script>
+    </body>
+</html>

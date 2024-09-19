@@ -1,0 +1,35 @@
+#creature-navi {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    & ul {
+        background: transparent;
+        display: flex;
+        flex-flow: row wrap;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        & li {
+            background: url(/resources/images/graphics/svg/creaturecard.svg) center/80% var(--primary) no-repeat;
+            width: 150px;
+            height: 200px;
+            display: flex;
+            position: relative;
+            margin: 1rem;
+            border: solid 5px var(--secondary);
+            border-radius: 1rem;
+            align-items: center;
+            justify-content: center;
+            & a {
+                background: var(--primary);
+                font: 1rem var(--script-font);
+                color: var(--third);
+                position: absolute;
+                border: solid 3px var(--secondary);
+                padding: 5px;
+                top: 11rem;
+                z-index: 2;
+            }
+        }
+    }
+}

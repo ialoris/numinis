@@ -1,0 +1,102 @@
+.top-content {
+    background: var(--primary);
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row wrap !important;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 5% !important;
+    order: 1;
+}
+
+.framebox {
+    display: block;
+    contain: paint;
+    order: 1;
+    flex: 1.7;
+    & button {
+        background: var(--sixth);
+        font-size: 12px;
+        text-align: center;
+        display: none;
+        filter: drop-shadow(1.7px 3.4px 3.4px hsl(0deg 0% 0% / 0.45)) opacity(50%);
+        border: none;
+        padding: 0.2rem;
+        position: absolute;
+        bottom: 3%;
+        right: 3%;
+        z-index: 1;
+    }
+    &:hover button {
+        display: block;
+    }
+    &.expand {
+        width: 100%;
+        flex-basis: 100%;
+        & .frame {
+            & :not(.frameback) {
+                display: none;
+            }
+        }
+        & .frameback {
+            mask: linear-gradient(90deg, transparent 0%, #000 0.1%);
+            width: 100%;
+            display: block;
+            margin: 0;
+            padding: 0;
+            object-fit: contain;
+        }
+    }
+}
+
+#btnspan {
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.infobox {
+    background: var(--seventh);
+    height: auto;
+    display: block;
+    padding: 2rem 2rem 2rem 0;
+    margin-top: 5%;
+    order: 2;
+    flex: 1;
+    & ul {
+        width: 100%;
+        height: max-content;
+        & li {
+            width: 100%;
+            display: flex;
+            & span:first-child {
+                background: url(/resources/images/graphics/svg/endless-clouds.svg) var(--primary) center/5% fixed repeat;
+                color: var(--third);
+                font-size: 2rem;
+                text-align: center;
+                padding: 0.5rem;
+                margin-right: 5px;
+            }
+            & span:nth-child(2) {
+                height: 0.5px;
+                border: var(--secondary) solid 0.5px;
+                margin: auto;
+                flex-grow: 2;
+            }
+            & span:last-child {
+                font: normal 1rem var(--body-font);
+                margin: auto;
+                padding: 0.5rem;
+            }
+        }
+    }
+    &.expand {
+        margin-top: 0;
+    }
+}
+
+.lower-content {
+    display: flex;
+    order: 2;
+    padding: 0 5% 5% 5% !important;
+}
