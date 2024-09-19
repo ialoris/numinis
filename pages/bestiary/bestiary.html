@@ -53,12 +53,17 @@
                 <section>
                     <h1>Bestiary</h1>
                     <h2><span class="icon-bookstack"></span><span></span>A Guide</h2>
-                    <div id="creature-navi">
+                    <div id="creature-navi" v-cloak>
                         <div v-if="loading">Loading creatures...</div>
                         <div v-else-if="error">{{ error }}</div>
                         <ul v-else-if="creatures.length > 0">
                             <li v-for="creature in creatures" :key="creature.id">
-                                <a href="#" @click.prevent="selectCreature(creature.id)">{{ creature.Name }}</a>
+                                <a href="#" @click.prevent="selectCreature(creature.id)">
+                                    <img src="#" :src="creature.Card"/>
+                                    <span>
+                                        {{ creature.Name }}
+                                    </span>
+                                </a>
                             </li>
                         </ul>
                         <div v-else>No creatures found</div>

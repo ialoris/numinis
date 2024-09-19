@@ -10,25 +10,38 @@
         align-items: center;
         justify-content: center;
         & li {
-            background: url(/resources/images/graphics/svg/creaturecard.svg) center/80% var(--primary) no-repeat;
+            background: url(/resources/images/graphics/svg/creaturecard.svg) center/80% var(--secondary) no-repeat;
             width: 150px;
             height: 200px;
             display: flex;
             position: relative;
             margin: 1rem;
-            border: solid 5px var(--secondary);
+            border: solid 5px var(--primary);
             border-radius: 1rem;
             align-items: center;
             justify-content: center;
             & a {
-                background: var(--primary);
+                & span
+                background: var(--secondary);
+                width: 110px;
+                height: auto;
                 font: 1rem var(--script-font);
                 color: var(--third);
+                text-align: center;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-emphasis: none;
                 position: absolute;
-                border: solid 3px var(--secondary);
+                border: solid 3px var(--primary);
                 padding: 5px;
-                top: 11rem;
+                margin-top: 12rem;
                 z-index: 2;
+                & img {
+                    width: 50%;
+                    position: absolute;
+                    z-index: 1;
+                }
             }
         }
     }
