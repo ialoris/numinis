@@ -178,6 +178,11 @@ html {
     }
 }
 
+/* vue */
+[v-cloak] {
+    display: none;
+}
+
 /* svgs */
 .vine {
     width: 100%;
