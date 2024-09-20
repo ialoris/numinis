@@ -50,7 +50,7 @@
 
         <div class="main">
             <main id="swup" class="transition-fade">
-                <section>
+                <section class="bestiary-navi">
                     <h1>Bestiary</h1>
                     <h2><span class="icon-bookstack"></span><span></span>A Guide</h2>
                     <div id="creature-navi" v-cloak>
@@ -60,9 +60,9 @@
                             <li v-for="creature in creatures" :key="creature.id">
                                 <a href="#" @click.prevent="selectCreature(creature.id)">
                                     <img :src="creature.Card"/>
-                                    <span>
+                                    <div class="ribbon">
                                         {{ creature.Name }}
-                                    </span>
+                                    </div>
                                 </a>
                             </li>
                         </ul>
@@ -75,9 +75,9 @@
                             <li v-for="flora in floras" :key="flora.id">
                                 <a href="#" @click.prevent="selectFlora(flora.id)">
                                     <img :src="flora.Card"/>
-                                    <span>
+                                    <div class="ribbon">
                                         {{ flora.Name }}
-                                    </span>
+                                    </div>
                                 </a>
                             </li>
                         </ul>
