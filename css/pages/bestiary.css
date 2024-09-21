@@ -20,8 +20,7 @@
         border-radius: 0.5rem;
         align-items: center;
         justify-content: center;
-        filter: drop-shadow(0 0 0 var(--primary));
-        contain: size layout;
+        transition: all 1s ease;
         & a {
           display: flex;
           position: absolute;
@@ -29,7 +28,7 @@
           justify-content: center;
           & .ribbon {
             --s: 1em; /* the ribbon size */
-            --d: .3em;  /* the depth */
+            --d: .2em;  /* the depth */
             --c: .5em;  /* the cutout part */
             
             padding: 0 calc(var(--s) + .5em) var(--d);
@@ -48,7 +47,7 @@
             white-space: nowrap;
             overflow: hidden;
             position: absolute;
-            margin-top: 12rem;
+            margin-top: 11.5rem;
           }
           & img {
             width: 150px;
@@ -60,7 +59,7 @@
           }
         }
         &:hover {
-          filter: drop-shadow(1px 5px rgba(0, 0, 0, 0.3));
+          filter: drop-shadow(0 5px rgba(0, 0, 0, 0.3));
           transition: all 1s ease;
         }
       }
@@ -72,7 +71,7 @@
   & ul {
     & li {
       background: url(/resources/images/graphics/svg/creaturecard.svg)
-      center/contain var(--secondary) no-repeat;
+      center/100% var(--secondary) no-repeat;
     }
   }
 }
@@ -81,7 +80,7 @@
   & ul {
     & li {
       background: url(/resources/images/graphics/svg/plantcard.svg)
-      center/contain var(--secondary) no-repeat;
+      center/100% var(--secondary) no-repeat;
     }
   }
 }
